@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BluetoothList</string>
+    <string name="paired_devices">Paired</string>
+    <string name="no_paired_devices">No paired devices</string>
+    <string name="discovered_devices">Discovered</string>
+    <string name="no_discovered_devices">No discovered devices</string>
+    <string name="no_name">No name</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="dialog_message_text">To show discovered devices turn on location provider</string>
+</resources>

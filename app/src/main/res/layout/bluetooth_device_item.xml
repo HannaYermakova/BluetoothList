@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bluetoothDevice"
+            type="by.aermakova.bluetoothlist.data.BluetoothDeviceModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:visibility="gone"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/devices_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/title_height"
+            app:group_title="@{bluetoothDevice}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/device_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{bluetoothDevice.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/devices_title"
+            tools:text="AirPods" />
+
+        <TextView
+            android:id="@+id/device_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{bluetoothDevice.hardwareAddress}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/device_title"
+            tools:text="00:00:00:00:00:00" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
