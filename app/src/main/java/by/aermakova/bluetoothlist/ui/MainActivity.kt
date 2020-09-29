@@ -10,9 +10,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.aermakova.bluetoothlist.R
 import by.aermakova.bluetoothlist.data.toModel
 import by.aermakova.bluetoothlist.databinding.ActivityMainBinding
@@ -41,15 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        initAdapter(binding.devicesRecycler, devicesAdapter)
-        viewModel.listPaired.observe(this, Observer {
-            devicesAdapter.updateData(it)
-        })
-    }
-
-    private fun initAdapter(recycler: RecyclerView, itemAdapter: ItemAdapter) {
-        with(recycler) {
-            adapter = itemAdapter
+        with(binding.devicesRecycler) {
+            adapter = devicesAdapter
             val manager = LinearLayoutManager(this@MainActivity)
             layoutManager = manager
         }
@@ -109,9 +100,7 @@ class MainActivity : AppCompatActivity() {
                 BluetoothDevice.ACTION_FOUND -> {
                     val device: BluetoothDevice? =
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                    if (device != null) {
-                        viewModel.updatePaired(device.toModel(DISCOVERED_TYPE))
-                    }
+                    device?.let { viewModel.updatePaired(device.toModel(DISCOVERED_TYPE)) }
                 }
             }
         }
@@ -125,11 +114,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun findPairedDevices() {
         val pairedDevices = bluetoothAdapter?.bondedDevices
-        val listPaired =
-            pairedDevices?.map { device -> device.toModel(PAIRED_TYPE) }
-        if (listPaired != null) {
-            viewModel.updatePaired(listPaired)
-        }
+        val listPaired = pairedDevices?.map { device -> device.toModel(PAIRED_TYPE) }
+        listPaired?.let { viewModel.updatePaired(listPaired) }
     }
 
     override fun onDestroy() {
