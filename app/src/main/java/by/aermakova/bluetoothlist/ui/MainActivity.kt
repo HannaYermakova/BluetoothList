@@ -18,9 +18,10 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 
-
-const val PAIRED_TYPE = 0
-const val DISCOVERED_TYPE = 1
+const val PAIRED_TYPE_TITLE = 0
+const val PAIRED_TYPE = 1
+const val DISCOVERED_TYPE_TITLE  = 2
+const val DISCOVERED_TYPE = 3
 
 class MainActivity : AppCompatActivity() {
 

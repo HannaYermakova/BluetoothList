@@ -17,23 +17,12 @@
         android:layout_margin="8dp">
 
         <TextView
-            android:visibility="gone"
-            android:textColor="@color/colorBlack"
-            android:id="@+id/devices_title"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/title_height"
-            app:group_title="@{bluetoothDevice}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/device_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{bluetoothDevice.title}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/devices_title"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="AirPods" />
 
         <TextView
