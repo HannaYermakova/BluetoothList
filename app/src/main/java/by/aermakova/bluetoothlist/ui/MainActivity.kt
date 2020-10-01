@@ -10,8 +10,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.aermakova.bluetoothlist.R
+import by.aermakova.bluetoothlist.data.BluetoothDeviceModel
 import by.aermakova.bluetoothlist.data.toModel
 import by.aermakova.bluetoothlist.databinding.ActivityMainBinding
 import com.google.android.gms.common.api.ResolvableApiException
@@ -20,7 +22,7 @@ import com.google.android.gms.tasks.Task
 
 const val PAIRED_TYPE_TITLE = 0
 const val PAIRED_TYPE = 1
-const val DISCOVERED_TYPE_TITLE  = 2
+const val DISCOVERED_TYPE_TITLE = 2
 const val DISCOVERED_TYPE = 3
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private var bluetoothAdapter: BluetoothAdapter? = null
-    private val devicesAdapter = ItemAdapter()
+
+    //    private val devicesAdapter = ItemAdapter()
+    private lateinit var devicesAdapter: GenericRecyclerAdapter<BluetoothDeviceModel, BluetoothDeviceModelWrapper>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setAdapter() {
         with(binding.devicesRecycler) {
-            adapter = devicesAdapter
+            adapter = GenericRecyclerAdapter(object : GenericRecyclerAdapter.GenericContract<BluetoothDeviceModel, BluetoothDeviceModelWrapper>{
+                override fun getBinding(viewType: Int): ViewDataBinding {
+
+                }
+
+                override fun getBR(viewType: Int): Int {
+
+                }
+
+            })
             val manager = LinearLayoutManager(this@MainActivity)
             layoutManager = manager
         }
@@ -171,3 +184,7 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_ENABLE_BT = 258
     }
 }
+
+abstract class BluetoothDeviceModelWrapper(
+    data: BluetoothDeviceModel
+) : GenericItemWrapper<BluetoothDeviceModel>(data)
